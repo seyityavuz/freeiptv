@@ -1,0 +1,10 @@
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:9
+#EXT-X-MEDIA-SEQUENCE:2692678
+#EXT-X-PROGRAM-DATE-TIME:2025-09-28T02:01:22.086Z
+#EXTINF:6,
+https://cdn.live.easybroadcast.io/abr_corp/73_aloula_w1dqfwm/corp/73_aloula_w1dqfwm_480p/dvr_v_p923_84141000.ts?token=7WQMExvs7WkL2Yvx5zxOkEWuP_jC2vlTrQ6oV9Yngk4&token_path=/abr_corp/73_aloula_w1dqfwm/corp/73_aloula_w1dqfwm_480p&expires=1759046802
+#EXT-X-PROGRAM-DATE-TIME:2025-09-28T02:01:28.086Z
+#EXTINF:4.553,
+https://cdn.live
