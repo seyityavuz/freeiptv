@@ -1,0 +1,46 @@
+name: dzhyt
+
+on:
+  schedule:
+    - cron: '*/55 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: config
+        run: |
+          git config --global user.email "<>"
+          git config --global user.name "dzhyt bot"
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+          
+      - name: Install requests module
+        run: python3 -m pip install requests
+
+      - name: fetch and replace content dzhyt
+        run: |
+          final_url=$(python3 ressources/kuw/dzhyt.py)
+          new_e=$(echo "$final_url" | grep -o 'e=[0-9]*' | cut -d= -f2)
+          new_token=$(echo "$final_url" | grep -o 'token=[^&]*' | cut -d= -f2)
+          sed -i "/EL HAYAT DZ/{n;s/e=[0-9]*/e=$new_e/;s/token=[^&]*/token=$new_token/}" all.m3u
+          sed -i "/EL HAYAT DZ/{n;s/e=[0-9]*/e=$new_e/;s/token=[^&]*/token=$new_token/}" ressources/allgr.m3u
+
+      - name: git add
+        run: |
+          git add -A
+          ls -la 
+          
+      - name: commit & push
+        run: |
+          git pull
+          git add all.m3u ressources/allgr.m3u
+          git commit -m "dzhyt updated"
+          git push

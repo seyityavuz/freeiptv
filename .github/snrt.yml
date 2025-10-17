@@ -1,0 +1,39 @@
+name: snrt
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: updating snrt
+        run: bash ressources/mar/snrt.sh
+
+      - name: git add
+        run: |
+          git add -A
+          ls -la 
+
+      - name: Commit & Push changes
+        run: |
+          git config --global user.email "<>"
+          git config --global user.name "snrt bot"
+          
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "snrt updated"
+            git push origin master
+          fi
